@@ -120,11 +120,7 @@ config.keys = {
 		key = "v",
 		mods = clipboard_key_mods,
 		action = wezterm.action_callback(function(window, pane)
-			if pane:is_alt_screen_active() then
-				window:perform_action(wezterm.action.SendKey({ key = "v", mods = "CTRL" }), pane)
-			else
-				window:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
-			end
+			window:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
 		end),
 	},
 
@@ -172,6 +168,14 @@ config.keys = {
 		key = "d",
 		mods = switch_key_mods,
 		action = wezterm.action.ActivatePaneDirection("Right"),
+	},
+}
+
+config.ssh_domains = {
+	{
+		name = "NAS",
+		remote_address = "inet.cloudiful.cn",
+		username = "root",
 	},
 }
 
