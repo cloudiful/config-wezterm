@@ -31,9 +31,9 @@ config.color_scheme = "Catppuccin Mocha"
 -- need to install JetBrainsMono Nerd Font Mono first
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrainsMono Nerd Font Mono", weight = "Regular" },
-	{ family = "霞鹜文楷等宽" },
+	{ family = "LXGW WenKai Mono" },
 })
-config.font_size = 16
+config.font_size = 12
 
 -- color
 config.colors = {
@@ -46,9 +46,9 @@ config.use_fancy_tab_bar = true
 
 -- padding
 config.window_padding = {
-	left = 10,
-	right = 10,
-	top = 0,
+	left = 20,
+	right = 20,
+	top = 20,
 	bottom = 0,
 }
 
@@ -56,7 +56,7 @@ config.window_padding = {
 if os_name == "windows" then
 	-- available on Windows 11 build 22621 and later.
 	config.window_background_opacity = 0.9
-	config.win32_system_backdrop = "Auto"
+	config.win32_system_backdrop = "Acrylic"
 elseif os_name == "macos" then
 	local on_battery = false
 
@@ -116,17 +116,17 @@ config.keys = {
 	},
 
 	-- use clipboard_key_mods+v to paste from clipboard
-	-- {
-	-- 	key = "v",
-	-- 	mods = clipboard_key_mods,
-	-- 	action = wezterm.action_callback(function(window, pane)
-	-- 		if pane:is_alt_screen_active() then
-	-- 			window:perform_action(wezterm.action.SendKey({ key = "v", mods = "CTRL" }), pane)
-	-- 		else
-	-- 			window:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
-	-- 		end
-	-- 	end),
-	-- },
+	{
+		key = "v",
+		mods = clipboard_key_mods,
+		action = wezterm.action_callback(function(window, pane)
+			if pane:is_alt_screen_active() then
+				window:perform_action(wezterm.action.SendKey({ key = "v", mods = "CTRL" }), pane)
+			else
+				window:perform_action(wezterm.action.PasteFrom("Clipboard"), pane)
+			end
+		end),
+	},
 
 	-- use clipboard_key_mods+s to save
 	{
@@ -150,17 +150,6 @@ config.keys = {
 				window:perform_action(wezterm.action.SendKey({ key = "z", mods = "CTRL" }), pane)
 			end
 		end),
-	},
-
-	{
-		key = "LeftArrow",
-		mods = clipboard_key_mods,
-		action = wezterm.action.SendKey({ key = "b", mods = "ALT" }),
-	},
-	{
-		key = "RightArrow",
-		mods = clipboard_key_mods,
-		action = wezterm.action.SendKey({ key = "f", mods = "ALT" }),
 	},
 
 	-- use switch_key+wasd to switch pane
