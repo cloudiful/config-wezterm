@@ -190,7 +190,7 @@ config.keys = {
 	{
 		key = "w",
 		mods = clipboard_key_mods,
-		action = wezterm.action.CloseCurrentPane({ confirm = true }),
+		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 }
 
