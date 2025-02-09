@@ -4,6 +4,7 @@ local startup = require("startup")
 local keymaps = require("keymaps")
 local style = require("style")
 local servers = require("servers")
+local plugins = require("plugins")
 
 -- This table will hold the configuration.
 local config = {}
@@ -18,6 +19,7 @@ startup.apply(config)
 keymaps.apply(config)
 style.apply(config)
 servers.apply(config)
+plugins.apply(config)
 
 -- and finally, return the configuration to wezterm
 return config
