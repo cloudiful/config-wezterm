@@ -33,7 +33,6 @@ config.font = wezterm.font_with_fallback({
 	{ family = "JetBrainsMono Nerd Font Mono", weight = "Regular" },
 	{ family = "LXGW WenKai Mono" },
 })
-config.font_size = 12
 
 -- color
 config.colors = {
@@ -54,10 +53,12 @@ config.window_padding = {
 
 -- add transparent blur to the window
 if os_name == "windows" then
+	config.font_size = 12
 	-- available on Windows 11 build 22621 and later.
 	config.window_background_opacity = 0.9
 	config.win32_system_backdrop = "Acrylic"
 elseif os_name == "macos" then
+	config.font_size = 15
 	local on_battery = false
 
 	-- decide if using battery
