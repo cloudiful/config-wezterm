@@ -7,6 +7,11 @@ function module.apply(config)
 			remote_address = "inet.cloudiful.cn",
 			username = "root",
 		},
+		{
+			name = "hk",
+			remote_address = "38.207.174.214",
+			username = "cloudiful",
+		},
 	}
 end
 

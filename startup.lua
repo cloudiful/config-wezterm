@@ -1,6 +1,7 @@
 local wezterm = require("wezterm")
 local utils = require("utils")
 local module = {}
+local mux = wezterm.mux
 
 function module.apply(config)
 	local os_name = utils.os_name()
@@ -14,7 +15,7 @@ function module.apply(config)
 
 	-- startup wezterm in max size
 	wezterm.on("gui-startup", function(cmd)
-		local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+		local tab, pane, window = mux.spawn_window(cmd or {})
 		window:gui_window():maximize()
 	end)
 end
