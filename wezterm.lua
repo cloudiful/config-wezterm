@@ -69,7 +69,7 @@ elseif os_name == "macos" then
 
 	-- if not on battery then enable blur effect
 	if not on_battery then
-		config.window_background_opacity = 0.3
+		config.window_background_opacity = 0.8
 		config.macos_window_background_blur = 60
 	else
 		wezterm.log_info("Using battery, so no transparent blur effect for background.")
