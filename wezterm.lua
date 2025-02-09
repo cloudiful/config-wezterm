@@ -82,6 +82,8 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
+config.default_gui_startup_args = { "connect", "unix" }
+
 -- if on Windows uee ALT+wasd to switch pane
 -- if on Mac use CTRL+wasd to switch pane
 local switch_key_mods = ""
