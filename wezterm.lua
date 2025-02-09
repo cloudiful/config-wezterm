@@ -30,8 +30,8 @@ config.color_scheme = "Catppuccin Mocha"
 -- font
 -- need to install JetBrainsMono Nerd Font Mono first
 config.font = wezterm.font_with_fallback({
-	{ family = "JetBrainsMono Nerd Font Mono", weight = "Regular" },
-	{ family = "LXGW WenKai Mono" },
+	{ family = "JetBrains Mono" },
+	{ family = "Source Han Sans CN" },
 })
 
 -- color
@@ -75,6 +75,9 @@ elseif os_name == "macos" then
 	else
 		wezterm.log_info("Using battery, so no transparent blur effect for background.")
 	end
+else
+	config.font_size = 12
+	config.window_background_opacity = 0.8
 end
 
 -- startup wezterm in max size
@@ -86,16 +89,21 @@ end)
 config.default_gui_startup_args = { "connect", "unix" }
 
 -- if on Windows uee ALT+wasd to switch pane
--- if on Mac use CTRL+wasd to switch pane
-local switch_key_mods = ""
+-- if on Mac or Linux use CTRL+wasd to switch pane
 local clipboard_key_mods = ""
 if os_name == "windows" then
-	switch_key_mods = "ALT"
 	clipboard_key_mods = "CTRL"
 elseif os_name == "macos" then
-	switch_key_mods = "CTRL"
 	clipboard_key_mods = "CMD"
+else
+	clipboard_key_mods = "CTRL"
 end
+
+config.leader = {
+	key = "g",
+	mods = clipboard_key_mods,
+	timeout_milliseconds = 1000,
+}
 
 config.keys = {
 	-- if in fullscreen terminal app
@@ -135,7 +143,6 @@ config.keys = {
 			if pane:is_alt_screen_active() then
 				window:perform_action(wezterm.action.SendKey({ key = "s", mods = "CTRL" }), pane)
 			else
-				pane:send_text("save")
 			end
 		end),
 	},
@@ -151,32 +158,45 @@ config.keys = {
 		end),
 	},
 
-	-- use switch_key+wasd to switch pane
+	{
+		key = "Backspace",
+		mods = clipboard_key_mods,
+		action = wezterm.action_callback(function(window, pane)
+			if pane:is_alt_screen_active() then
+			else
+				window:perform_action(wezterm.action.SendKey({ key = "w", mods = "CTRL" }), pane)
+			end
+		end),
+	},
+
+	-- use clipboard_key_mods+w to close pane
+	{
+		key = "\\",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local new_pane = pane:split({})
+		end),
+	},
+
+	{
+		key = "-",
+		mods = "LEADER",
+		action = wezterm.action_callback(function(window, pane)
+			local new_pane = pane:split({ direction = "Bottom" })
+		end),
+	},
+
+	-- use clipboard_key_mods+w to close pane
 	{
 		key = "w",
-		mods = switch_key_mods,
-		action = wezterm.action.ActivatePaneDirection("Up"),
-	},
-	{
-		key = "a",
-		mods = switch_key_mods,
-		action = wezterm.action.ActivatePaneDirection("Left"),
-	},
-	{
-		key = "s",
-		mods = switch_key_mods,
-		action = wezterm.action.ActivatePaneDirection("Down"),
-	},
-	{
-		key = "d",
-		mods = switch_key_mods,
-		action = wezterm.action.ActivatePaneDirection("Right"),
+		mods = clipboard_key_mods,
+		action = wezterm.action.CloseCurrentPane({ confirm = true }),
 	},
 }
 
 config.ssh_domains = {
 	{
-		name = "NAS",
+		name = "nas",
 		remote_address = "inet.cloudiful.cn",
 		username = "root",
 	},
