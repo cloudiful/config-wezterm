@@ -116,7 +116,7 @@ function module.apply(config)
 				if pane:is_alt_screen_active() then
 					window:perform_action(wezterm.action.SendKey({ key = "w", mods = "CTRL" }), pane)
 				else
-					window:perform_action(wezterm.action.CloseCurrentPane({ confirm = true }), pane)
+					window:perform_action(wezterm.action.CloseCurrentPane({ confirm = false }), pane)
 				end
 			end),
 		},
