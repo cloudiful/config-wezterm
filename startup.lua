@@ -14,10 +14,10 @@ function module.apply(config)
 	config.default_gui_startup_args = { "connect", "unix" }
 
 	-- startup wezterm in max size
-	wezterm.on("gui-startup", function(cmd)
-		local tab, pane, window = mux.spawn_window(cmd or {})
-		window:gui_window():maximize()
-	end)
+	-- wezterm.on("gui-startup", function(cmd)
+	-- 	local tab, pane, window = mux.spawn_window(cmd or {})
+	-- 	window:gui_window():maximize()
+	-- end)
 end
 
 return module
