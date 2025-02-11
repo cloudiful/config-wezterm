@@ -10,12 +10,16 @@ function module.apply(config)
 	-- if on Windows uee ALT+wasd to switch pane
 	-- if on Mac or Linux use CTRL+wasd to switch pane
 	local clipboard_key_mods = ""
+  local target_key_mods = ""
 	if os_name == "windows" then
 		clipboard_key_mods = "CTRL"
+    target_key_mods = "CTRL"
 	elseif os_name == "macos" then
 		clipboard_key_mods = "CMD"
+    target_key_mods = "CTRL"
 	else
 		clipboard_key_mods = "CTRL"
+    target_key_mods = "CTRL"
 	end
 
 	config.keys = {
@@ -33,7 +37,7 @@ function module.apply(config)
 					if has_selection then
 						window:perform_action(wezterm.action.ClearSelection, pane)
 					else
-						window:perform_action(wezterm.action.SendKey({ key = "c", mods = clipboard_key_mods }), pane)
+						window:perform_action(wezterm.action.SendKey({ key = "c", mods = target_key_mods }), pane)
 					end
 				end
 			end),
@@ -56,7 +60,7 @@ function module.apply(config)
 				if pane:is_alt_screen_active() then
 					window:perform_action(wezterm.action.SendKey({ key = "s", mods = "CTRL" }), pane)
 				else
-					window:perform_action(wezterm.action.SendKey({ key = "s", mods = clipboard_key_mods }), pane)
+					window:perform_action(wezterm.action.SendKey({ key = "s", mods = target_key_mods }), pane)
 				end
 			end),
 		},
@@ -69,7 +73,7 @@ function module.apply(config)
 				if pane:is_alt_screen_active() then
 					window:perform_action(wezterm.action.SendKey({ key = "z", mods = "CTRL" }), pane)
 				else
-					window:perform_action(wezterm.action.SendKey({ key = "z", mods = clipboard_key_mods }), pane)
+					window:perform_action(wezterm.action.SendKey({ key = "z", mods = target_key_mods }), pane)
 				end
 			end),
 		},
