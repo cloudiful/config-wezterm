@@ -1,7 +1,7 @@
-local wezterm = require("wezterm")
+-- local wezterm = require("wezterm")
 local utils = require("utils")
 local module = {}
-local mux = wezterm.mux
+-- local mux = wezterm.mux
 
 function module.apply(config)
 	local os_name = utils.os_name()
