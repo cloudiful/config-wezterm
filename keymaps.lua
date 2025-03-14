@@ -78,17 +78,17 @@ function module.apply(config)
 			end),
 		},
 
-		{
-			key = "Backspace",
-			mods = clipboard_key_mods,
-			action = wezterm.action_callback(function(window, pane)
-				if pane:is_alt_screen_active() then
-					window:perform_action(wezterm.action.SendKey({ key = "Backspace", mods = "CTRL" }), pane)
-				else
-					window:perform_action(wezterm.action.SendKey({ key = "w", mods = "CTRL" }), pane)
-				end
-			end),
-		},
+		-- {
+		-- 	key = "Backspace",
+		-- 	mods = clipboard_key_mods,
+		-- 	action = wezterm.action_callback(function(window, pane)
+		-- 		if pane:is_alt_screen_active() then
+		-- 			window:perform_action(wezterm.action.SendKey({ key = "Backspace", mods = "CTRL" }), pane)
+		-- 		else
+		-- 			window:perform_action(wezterm.action.SendKey({ key = "w", mods = "CTRL" }), pane)
+		-- 		end
+		-- 	end),
+		-- },
 
 		-- new pane
 		{
